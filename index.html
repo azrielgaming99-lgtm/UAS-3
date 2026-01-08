@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Hitung Gaji Karyawan</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+
+<table class="kotak">
+    <!-- JUDUL -->
+    <tr>
+        <th colspan="2" class="judul">
+            Hitung Gaji Karyawan
+        </th>
+    </tr>
+
+    <!-- ISI -->
+    <tr>
+        <!-- INPUT -->
+        <td class="input">
+            <p><b>INPUTAN</b></p>
+
+            Gaji Pokok (Rp):<br>
+            <input type="number" id="gaji"><br><br>
+
+            Jumlah Jam Lembur:<br>
+            <input type="number" id="lembur"><br><br>
+
+            <button onclick="hitungGaji()">Hitung Gaji</button>
+        </td>
+
+        <!-- OUTPUT -->
+        <td class="output">
+            <p><b>OUTPUT</b></p>
+
+            Gaji Pokok : <span id="outGaji">Rp 0</span><br>
+            Total Gaji Lembur : <span id="outLembur">Rp 0</span><br>
+            Gaji Kotor : <span id="outKotor">Rp 0</span><br>
+            Pajak : <span id="outPajak">Rp 0</span><br><br>
+
+            <b>Gaji Bersih : <span id="outBersih">Rp 0</span></b>
+        </td>
+    </tr>
+</table>
+
+<script>
+function hitungGaji() {
+    let gaji = parseInt(document.getElementById("gaji").value);
+    let lembur = parseInt(document.getElementById("lembur").value);
+
+    let totalLembur = lembur * 20000;
+    let gajiKotor = gaji + totalLembur;
+
+    let pajak = 0;
+    if (gajiKotor < 5000000) {
+        pajak = gajiKotor * 0.05;
+    } else if (gajiKotor <= 10000000) {
+        pajak = gajiKotor * 0.10;
+    } else {
+        pajak = gajiKotor * 0.15;
+    }
+
+    let gajiBersih = gajiKotor - pajak;
+
+    document.getElementById("outGaji").innerHTML = "Rp " + gaji.toLocaleString();
+    document.getElementById("outLembur").innerHTML = "Rp " + totalLembur.toLocaleString();
+    document.getElementById("outKotor").innerHTML = "Rp " + gajiKotor.toLocaleString();
+    document.getElementById("outPajak").innerHTML = "Rp " + pajak.toLocaleString();
+    document.getElementById("outBersih").innerHTML = "Rp " + gajiBersih.toLocaleString();
+}
+</script>
+
+</body>
+</html>
